@@ -18,7 +18,7 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     pub_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
-    # image = models.ImageField(upload_to=None)
+    image = models.ImageField(upload_to="images/catalogue/book", null=True, blank=True)
     isbn = models.CharField(max_length=255, blank=True)
     slug = models.SlugField(max_length=255)
     url = models.URLField(max_length=255, verbose_name="Extenal Link URL", blank=True)
