@@ -1,3 +1,7 @@
-{% for book in object_list %}
-  <h1><a href='{% url "catalogue:book_detail" book.slug %}'>{{book.title}}</a></h1>
-{% endfor %}
+{% extends 'catalogue/base.html' %}
+
+{% block content %}
+  {% for book in object_list %}
+    <h1><a href='{% url "catalogue:book_detail" book.slug %}'>{{book.title}}</a></h1>
+  {% endfor %}
+{% endblock %}
