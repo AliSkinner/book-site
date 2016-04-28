@@ -9,6 +9,7 @@ class Author(models.Model):
     bio = models.TextField(blank=True)
     slug = models.SlugField(max_length=255)
     url = models.URLField(max_length=255, verbose_name="Extenal Link URL", blank=True)
+    image = models.ImageField(upload_to="images/catalogue/author", null=True, blank=True)
 
     def get_fullname(self):
         """
