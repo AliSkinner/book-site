@@ -1,10 +1,10 @@
 from django.conf.urls import url
-from .views import BookList, BookDetail, AuthorList, AuthorDetail
+from .views import BookList, BookDetail, AuthorList, AuthorDetail, HomePageView
 
 urlpatterns = [
 
     # landing page
-    url(r'^$', BookList.as_view(), name='book_list'),
+    url(r'^$', HomePageView.as_view(), name='homepage'),
 
     # titles
     url(r'^titles/$', BookList.as_view(), name='book_list'),

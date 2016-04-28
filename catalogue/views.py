@@ -1,6 +1,15 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from .models import Author, Book
+
+# Homepage
+class HomePageView(TemplateView):
+    template_name = "catalogue/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context['latest_releases'] = Book.objects.order_by('pub_date')[:4]
+        return context
 
 # show all books
 class BookList(ListView):
