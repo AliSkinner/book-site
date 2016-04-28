@@ -10,8 +10,14 @@ class Author(models.Model):
     slug = models.SlugField(max_length=255)
     url = models.URLField(max_length=255, verbose_name="Extenal Link URL", blank=True)
 
-    def __str__(self):
+    def get_fullname(self):
+        """
+        Returns Author's concatenated full name.
+        """
         return "{} {}".format(self.first_name, self.surname)
+
+    def __str__(self):
+        return self.get_fullname()
 
 class Book(models.Model):
     title = models.CharField(max_length=255)

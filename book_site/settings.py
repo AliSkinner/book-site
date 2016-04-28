@@ -112,6 +112,7 @@ USE_TZ = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, '../..',  'media')
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
@@ -129,10 +130,11 @@ AWS_HEADERS = {
 }
 
 AWS_S3_HOST = "s3-eu-west-1.amazonaws.com"
+AWS_PRELOAD_METADATA = True
 AWS_STORAGE_BUCKET_NAME = os.environ.get('BOOKS_BUCKET_NAME', '')
 AWS_ACCESS_KEY_ID = os.environ.get('BOOKS_ACCESS_KEY_ID', '')
 AWS_SECRET_ACCESS_KEY = os.environ.get('BOOKS_SECRET_ACCESS_KEY', '')
-
+AWS_QUERYSTRING_AUTH = False
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 STATICFILES_LOCATION = 'static'
 MEDIAFILES_LOCATION = 'media'
@@ -140,6 +142,5 @@ MEDIAFILES_LOCATION = 'media'
 import custom_storages
 STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
