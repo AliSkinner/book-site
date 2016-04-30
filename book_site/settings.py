@@ -48,6 +48,17 @@ TEMPLATES = [
 
 ALLOWED_HOSTS = []
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 # Application definition
 
@@ -61,6 +72,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'catalogue',
     'storages',
+    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -144,3 +156,6 @@ STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+
+THUMBNAIL_DEBUG = True
+THUMBNAIL_DUMMY = True

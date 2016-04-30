@@ -1,5 +1,5 @@
 {% extends 'catalogue/base.html' %}
-
+{% load thumbnail %}
 {% block content %}
 
 <!-- Title -->
@@ -14,14 +14,16 @@
 <!-- Details -->
 <div class="row">
   <div class="col-md-4">
-    <img class="img-responsive detail-image" src="{{ book.image.url }}" alt="">
+    {% thumbnail book.image "350x465" as im %}
+    <img class="img-responsive detail-image" src="{{ im.url }}" alt="{{book.title}}">
+    {% endthumbnail %}
   </div>
   <div class="col-md-8">
     <h3>Description</h3>
     <p>{{ book.description }}</p>
     <h3>Details</h3>
     <ul class="book-details">
-      <li>Author: {{ book.author.get_fullname }}, {{ book.author.nationality}} ({{ book.author.date_of_birth }} - {{ book.author.date_of_death }})</li>
+      <li>Author: <a href="{% url "catalogue:author_detail" book.author.slug %}">{{ book.author.get_fullname }}</a>, {{ book.author.nationality}} ({{ book.author.date_of_birth }} - {{ book.author.date_of_death }})</li>
       <li>Published: {{book.pub_date}}</li>
       <li>ISBN: {{ book.isbn }}</li>
       <li><a href="{{ book.url }}">Shop</a></li>
@@ -35,12 +37,14 @@
 {% if related_books %}
 <div class="row">
     <div class="col-lg-12">
-    <h3 class="page-header">Also by {{ book.author.get_fullname }}</h3>
+    <h3 class="page-header">Also by <a href="{% url "catalogue:author_detail" book.author.slug %}">{{ book.author.get_fullname }}</a></h3>
   </div>
   {% for book in related_books %}
   <div class="col-sm-3 col-xs-6">
     <a href="{% url "catalogue:book_detail" book.slug %}">
-      <img class="img-responsive portfolio-item" src="{{ book.image.url }}" alt="">
+      {% thumbnail book.image "250x365" as im %}
+      <img class="img-responsive portfolio-item" src="{{ im.url }}" alt="book.title">
+      {% endthumbnail %}
     </a>
   </div>
   {% endfor %}

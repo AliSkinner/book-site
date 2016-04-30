@@ -1,6 +1,6 @@
 {% extends 'catalogue/base.html' %}
 {% load static from staticfiles %}
-
+{% load thumbnail %}
 {% block content %}
 
 <!-- Title -->
@@ -17,8 +17,9 @@
   {% for author in object_list %}
   <div class="col-md-3 portfolio-item">
     <a href="{% url "catalogue:author_detail" author.slug %}">
-      <!-- <img class="img-responsive" src="{{MEDIA_URL}}{{ author.image }}" alt="{{author.get_fullname}}"> -->
-      <img class="img-responsive" src="http://placehold.it/400x400" alt="{{author.get_fullname}}">
+      {% thumbnail author.image "200x200" crop="80% top" as im %}
+          <img src="{{ im.url }}">
+      {% endthumbnail %}
     </a>
     <h3 class="author-name">{{ author.get_fullname }}</h3>
   </div>

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import Author, Book
+from django.core.cache import cache
 
 # Homepage
 class HomePageView(TemplateView):

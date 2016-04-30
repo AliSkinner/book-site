@@ -1,6 +1,6 @@
 {% extends 'catalogue/base.html' %}
 {% load static from staticfiles %}
-
+{% load thumbnail %}
 {% block content %}
 
 <!-- Title -->
@@ -17,7 +17,9 @@
   {% for book in object_list %}
   <div class="col-md-3 portfolio-item">
     <a href="{% url "catalogue:book_detail" book.slug %}">
-      <img class="img-responsive" src="{{MEDIA_URL}}{{ book.image }}" alt="{{book.title}}">
+      {% thumbnail book.image "250x365" crop="center" as im %}
+      <img class="img-responsive" src="{{ im.url }}" alt="{{book.title}}">
+      {% endthumbnail %}
     </a>
   </div>
   {% if forloop.counter|divisibleby:"4" %}
