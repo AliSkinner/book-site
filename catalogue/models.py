@@ -21,7 +21,7 @@ class Author(models.Model):
         return self.get_fullname()
 
 class Book(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, null=False, blank=False)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     pub_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
@@ -32,3 +32,16 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+class CarouselSlide(models.Model):
+    title = models.CharField(max_length=255, null=False, blank=False)
+    image = models.ImageField(upload_to="images/catalogue/homepage", null=True, blank=True)
+    url = models.URLField(max_length=255, verbose_name="Extenal Link URL", blank=True)
+    created_on = models.DateField(auto_now=True, null=True, blank=False)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Homepage Carousel Slide"

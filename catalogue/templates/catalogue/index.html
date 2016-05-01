@@ -2,30 +2,27 @@
 {% load thumbnail %}
 {% load static from staticfiles %}
 {% block extra_footer %}
-  <script type="text/javascript" src="{% static "js/catalogue.js" %}">
+<script type="text/javascript" src="{% static "js/catalogue.js" %}"></script>
 {% endblock %}
 {% block content %}
 
-</script>
 <!-- Header Carousel -->
 <header id="myCarousel" class="carousel slide">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+    {% for slide in slides %}
+    <li data-target="#myCarousel" data-slide-to="{{ forloop.counter }}" {% if forloop.first %} class="active"{% endif %}></li>
+    {% endfor %}
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner home-carousel">
     {% for slide in slides %}
     <div class="item {% if forloop.first %} active{% endif %}">
-      {% thumbnail 'http://placehold.it/1900x1080&text=Slide One' "1900x1080" as im %}
-      <div class="fill" style="background-image:url('{{ im.url }}');"></div>
+    <div></div>
+      {% thumbnail slide.image "1900x1080" as im %}
+      <img src="{{im.url}}" alt="" />
       {% endthumbnail %}
-      <div class="carousel-caption">
-        <h2>Caption {{forloop.counter}}</h2>
-      </div>
     </div>
     {% endfor %}
   </div>
@@ -41,47 +38,35 @@
 
 <!-- Page Content -->
 <div class="container">
-
   <!-- Marketing Icons Section -->
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">
-        Welcome to Modern Business
+        Welcome to Book Site.
       </h1>
     </div>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4><i class="fa fa-fw fa-check"></i> Bootstrap v3.2.0</h4>
-        </div>
-        <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-          <a href="#" class="btn btn-default">Learn More</a>
+
+    <div class="col-lg-12">
+      <h2>
+        Latest Releases.
+      </h2>
+    </div>
+
+    {% for book in latest_releases %}
+    <div class="col-sm-4 col-lg-4 col-md-4">
+      <div class="thumbnail">
+        {% thumbnail book.image "250x365" as im %}
+        <img class="img-responsive" src="{{ im.url }}" alt="{{ book.title }}">
+        {% endthumbnail %}
+        <div class="caption">
+          <h4><a href="{% url "catalogue:book_detail" book.slug %}">{{ book.title }}</a><br><small>{{book.author.get_fullname}}</small>
+          </h4>
+          <p>{{ book.description|slice:"150" }} <a href="{% url "catalogue:book_detail" book.slug %}">Read More...</a></p>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4><i class="fa fa-fw fa-gift"></i> Free &amp; Open Source</h4>
-        </div>
-        <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-          <a href="#" class="btn btn-default">Learn More</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4><i class="fa fa-fw fa-compass"></i> Easy to Use</h4>
-        </div>
-        <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-          <a href="#" class="btn btn-default">Learn More</a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
+
   </div>
 
   {% endblock %}

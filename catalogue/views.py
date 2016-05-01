@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
-from .models import Author, Book
+from .models import Author, Book, CarouselSlide
 from django.core.cache import cache
 
 # Homepage
@@ -9,8 +9,8 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['latest_releases'] = Book.objects.order_by('pub_date')[:4]
-        context['slides'] = range(3)
+        context['latest_releases'] = Book.objects.order_by('pub_date')[:3]
+        context['slides'] = CarouselSlide.objects.filter(active=True)
         return context
 
 # show all books
