@@ -10,6 +10,7 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['latest_releases'] = Book.objects.order_by('pub_date')[:4]
+        context['slides'] = range(3)
         return context
 
 # show all books

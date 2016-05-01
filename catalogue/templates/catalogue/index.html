@@ -1,7 +1,12 @@
 {% extends 'catalogue/base.html' %}
-
+{% load thumbnail %}
+{% load static from staticfiles %}
+{% block extra_footer %}
+  <script type="text/javascript" src="{% static "js/catalogue.js" %}">
+{% endblock %}
 {% block content %}
 
+</script>
 <!-- Header Carousel -->
 <header id="myCarousel" class="carousel slide">
   <!-- Indicators -->
@@ -12,25 +17,17 @@
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item active">
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+  <div class="carousel-inner home-carousel">
+    {% for slide in slides %}
+    <div class="item {% if forloop.first %} active{% endif %}">
+      {% thumbnail 'http://placehold.it/1900x1080&text=Slide One' "1900x1080" as im %}
+      <div class="fill" style="background-image:url('{{ im.url }}');"></div>
+      {% endthumbnail %}
       <div class="carousel-caption">
-        <h2>Caption 1</h2>
+        <h2>Caption {{forloop.counter}}</h2>
       </div>
     </div>
-    <div class="item">
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-      <div class="carousel-caption">
-        <h2>Caption 2</h2>
-      </div>
-    </div>
-    <div class="item">
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-      <div class="carousel-caption">
-        <h2>Caption 3</h2>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 
   <!-- Controls -->

@@ -2,7 +2,7 @@ boto==2.39.0
 dj-database-url==0.4.1
 Django==1.9.5
 django-grappelli==2.8.1
-django-redis==4.4.2
+django-redis-cache==1.6.5
 django-storages==1.4.1
 gunicorn==19.4.5
 Pillow==3.2.0
