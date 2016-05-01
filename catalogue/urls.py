@@ -13,4 +13,6 @@ urlpatterns = [
     # authors
     url(r'^authors/$', AuthorList.as_view(), name='author_list'),
     url(r'^authors/(?P<slug>[-\w]+)/$', AuthorDetail.as_view(), name='author_detail'),
+
+
 ]

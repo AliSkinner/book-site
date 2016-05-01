@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import Author, Book, CarouselSlide
 from django.core.cache import cache
+from .forms import MailingListForm
 
 # Homepage
 class HomePageView(TemplateView):
