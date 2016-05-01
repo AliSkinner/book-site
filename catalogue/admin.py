@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Book, CarouselSlide
+from .models import Author, Book, CarouselSlide, MailingListSubscriber
 
 class AuthorAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("first_name", "surname")}
@@ -10,6 +10,12 @@ class BookAdmin(admin.ModelAdmin):
 class CarouselSlideAdmin(admin.ModelAdmin):
     readonly_fields = ('created_on',)
 
+class MailingListSubscriberAdmin(admin.ModelAdmin):
+    readonly_fields = ('created_on',)
+    list_display = ('email', 'seen', 'created_on')
+
+
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(CarouselSlide, CarouselSlideAdmin)
+admin.site.register(MailingListSubscriber, MailingListSubscriberAdmin)

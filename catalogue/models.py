@@ -45,3 +45,11 @@ class CarouselSlide(models.Model):
 
     class Meta:
         verbose_name = "Homepage Carousel Slide"
+
+class MailingListSubscriber(models.Model):
+    email = models.EmailField(null=False, blank=False)
+    created_on = models.DateField(auto_now=True, null=True, blank=False)
+    seen = models.BooleanField(default=False, null=False, blank=False)
+
+    def __str__(self):
+        return self.email
