@@ -11,11 +11,19 @@ class Author(models.Model):
     url = models.URLField(max_length=255, verbose_name="Extenal Link URL", blank=True)
     image = models.ImageField(upload_to="images/catalogue/author", null=True, blank=True)
 
+    @property
     def get_fullname(self):
         """
         Returns Author's concatenated full name.
         """
         return "{} {}".format(self.first_name, self.surname)
+
+    @property
+    def number_of_books(self):
+        """
+        Returns Author's concatenated full name.
+        """
+        return len(self.book_set.all())
 
     def __str__(self):
         return self.get_fullname()

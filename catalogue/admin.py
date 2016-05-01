@@ -3,6 +3,7 @@ from .models import Author, Book, CarouselSlide, MailingListSubscriber
 
 class AuthorAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("first_name", "surname")}
+    list_display = ('get_fullname', 'nationality', 'date_of_birth', 'date_of_death', 'number_of_books', 'slug')
 
 class BookAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
