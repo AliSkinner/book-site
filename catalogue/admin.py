@@ -7,9 +7,12 @@ class AuthorAdmin(admin.ModelAdmin):
 
 class BookAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
+    list_display = ('title', 'author', 'pub_date', 'isbn', 'slug',)
 
 class CarouselSlideAdmin(admin.ModelAdmin):
     readonly_fields = ('created_on',)
+    list_display = ('title', 'url', 'active','created_on',)
+
 
 class MailingListSubscriberAdmin(admin.ModelAdmin):
     readonly_fields = ('created_on',)

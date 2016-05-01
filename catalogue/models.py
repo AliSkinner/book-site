@@ -26,7 +26,7 @@ class Author(models.Model):
         return len(self.book_set.all())
 
     def __str__(self):
-        return self.get_fullname()
+        return self.get_fullname
 
 class Book(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False)
@@ -45,7 +45,7 @@ class CarouselSlide(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False)
     image = models.ImageField(upload_to="images/catalogue/homepage", null=True, blank=True)
     url = models.URLField(max_length=255, verbose_name="Extenal Link URL", blank=True)
-    created_on = models.DateField(auto_now=True, null=True, blank=False)
+    created_on = models.DateField(auto_now_add=True, null=True, blank=False)
     active = models.BooleanField(default=True)
 
     def __str__(self):
