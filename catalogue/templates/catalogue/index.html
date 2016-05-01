@@ -20,9 +20,11 @@
     {% for slide in slides %}
     <div class="item {% if forloop.first %} active{% endif %}">
     <div></div>
-      {% thumbnail slide.image "1900x1080" as im %}
-      <img src="{{im.url}}" alt="" />
-      {% endthumbnail %}
+      <a href="{{ slide.url }}">
+        {% thumbnail slide.image "1900x1080" as im %}
+        <img src="{{im.url}}" alt="{{ slide.title }}" />
+        {% endthumbnail %}
+      </a>
     </div>
     {% endfor %}
   </div>
