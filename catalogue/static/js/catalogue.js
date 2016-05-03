@@ -5,7 +5,7 @@ $(document).ready( function () {
   // init homepage carousel
   $('.carousel').carousel('cycle')
 
-  // mialing-list form
+  // mailing-list form
   $('#mailing-list-form').submit(function(e){
     var form = $('#mailing-list-form')
       , formData = form.serializeArray()
@@ -15,6 +15,7 @@ $(document).ready( function () {
     e.preventDefault()
     button.addClass('disabled')
     $.post(postUrl, formData, function(content, message, status){
+      debugger
         if (status.status === 200){
           $('input').val('')
           button.removeClass('btn-primary').addClass('btn-success').text('Success')

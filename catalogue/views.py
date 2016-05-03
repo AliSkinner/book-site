@@ -56,4 +56,6 @@ class MailingListView(View):
             form.save()
             # response_data = json.dumps(form.data)
             # import ipdb; ipdb.set_trace()
-            return HttpResponse(content='', content_type=None, status=200)
+            return HttpResponse(json.dumps(form.data), content_type="application/json")
+        else:
+            return HttpResponse(json.dumps(form.errors), content_type="application/json")
