@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.http import HttpResponse
+from django.views.generic import ListView, DetailView, TemplateView, View
 from .models import Author, Book, CarouselSlide
 from django.core.cache import cache
 from .forms import MailingListForm
+import json
 
 # Homepage
 class HomePageView(TemplateView):
@@ -43,3 +45,15 @@ class AuthorDetail(DetailView):
         # Get books by same author
         context['related_books'] = Book.objects.filter(author=self.object)
         return context
+
+# Mailing list
+class MailingListView(View):
+    form_class = MailingListForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            # response_data = json.dumps(form.data)
+            # import ipdb; ipdb.set_trace()
+            return HttpResponse(content='', content_type=None, status=200)

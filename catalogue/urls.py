@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import BookList, BookDetail, AuthorList, AuthorDetail, HomePageView
+from .views import BookList, BookDetail, AuthorList, AuthorDetail, HomePageView, MailingListView
 
 urlpatterns = [
 
@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'^authors/$', AuthorList.as_view(), name='author_list'),
     url(r'^authors/(?P<slug>[-\w]+)/$', AuthorDetail.as_view(), name='author_detail'),
 
+    # mailing list
+    url(r'^mailing-list/$', MailingListView.as_view(), name='mailing_list'),
 
 ]
