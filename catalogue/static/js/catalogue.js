@@ -9,12 +9,12 @@ $(document).ready( function () {
     var form = $('#mailing-list-form')
       , formData = form.serializeArray()
       , postUrl = form.attr('action')
-      , button = form.find('button')
+      , button = $('#mailing-list-submit')
       , helpBlock = $('.help-block')
 
     e.preventDefault()
     button.addClass('disabled')
-    
+
     // ajax post data
     $.post(postUrl, formData, function(content, message, status){
       if (content.message === 'failed'){

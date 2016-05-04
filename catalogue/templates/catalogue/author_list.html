@@ -5,7 +5,7 @@
 
 <!-- Title -->
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-xs-12">
     <h1 class="page-header">Authors
       <small>All</small>
     </h1>
@@ -15,10 +15,10 @@
 <!-- Book List -->
 <div class="row">
   {% for author in object_list %}
-  <div class="col-md-3 portfolio-item">
+  <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-0 author portfolio-item">
     <a href="{% url "catalogue:author_detail" author.slug %}">
       {% thumbnail author.image "200x200" crop="80% top" as im %}
-          <img src="{{ im.url }}">
+          <img src="{{ im.url }}" class="img-responsive" alt="{{author.get_fullname}}">
       {% endthumbnail %}
     </a>
     <h3 class="author-name">{{ author.get_fullname }}</h3>
