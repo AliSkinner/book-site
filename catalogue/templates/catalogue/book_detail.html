@@ -24,7 +24,7 @@
     <p>{{ book.description }}</p>
     <h3>Details</h3>
     <ul class="book-details">
-      <li>Author: <a href="{% url "catalogue:author_detail" book.author.slug %}">{{ book.author.get_fullname }}</a>, {{ book.author.nationality}} ({{ book.author.date_of_birth }} - {{ book.author.date_of_death }})</li>
+      <li>Author: <a href="{% url "catalogue:author_detail" book.author.slug %}">{{ book.author.get_fullname }}</a>, {{ book.author.nationality}} ({{ book.author.date_of_birth| date:"Y" }} - {{ book.author.date_of_death| date:"Y" }})</li>
       <li>Published: {{book.pub_date}}</li>
       <li>ISBN: {{ book.isbn }}</li>
       <li><a role="button" class="btn btn-info" href="{{ book.url }}">Shop</a></li>
