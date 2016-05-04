@@ -54,8 +54,9 @@ class MailingListView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            # response_data = json.dumps(form.data)
-            # import ipdb; ipdb.set_trace()
-            return HttpResponse(json.dumps(form.data), content_type="application/json")
+            data = {'message': 'Thank you for Subscribing.'}
+            return HttpResponse(json.dumps(data), content_type="application/json")
         else:
-            return HttpResponse(json.dumps(form.errors), content_type="application/json")
+            data = dict(form.errors)
+            data['message'] = 'failed'
+            return HttpResponse(json.dumps(data), content_type="application/json")
